@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT Musician (M_Name, Voice, Plays, Collections)>
+<!ELEMENT  M_Name (#PCDATA)>
+<!ELEMENT  Voice (#PCDATA)>
+<!ELEMENT  Plays EMPTY>
+<!ELEMENT  Collections (#PCDATA)>
+<!ATTLIST Musician mus_id CDATA #REQUIRED>
+<!ATTLIST Plays ref_ins CDATA #REQUIRED>
+
