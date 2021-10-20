@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT bill (item_no, item_name, quantity, unit_price, total_price, purchasers)>
+<!ATTLIST bill bill_id CDATA #REQUIRED>
+<!ATTLIST bill date CDATA #REQUIRED>
+<!ATTLIST bill biller_name CDATA #REQUIRED>
+
+<!ELEMENT  item_no (#PCDATA)>
+<!ELEMENT  item_name (#PCDATA)>
+<!ELEMENT  quantity (#PCDATA)>
+<!ELEMENT  unit_price (#PCDATA)>
+<!ELEMENT  total_price (#PCDATA)>
+
+<!ELEMENT  purchasers (purchaser+)>
+<!ELEMENT  purchaser (name, gender, location)>
+<!ATTLIST purchaser id_no CDATA #REQUIRED>
+<!ELEMENT  name (#PCDATA)>
+<!ELEMENT  gender (#PCDATA)>
+<!ELEMENT  location (#PCDATA)>
