@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Musician SYSTEM "musician.dtd">
-<Musician mus_id=m707>
+<Musician mus_id="m707">
 <M_Name>Doris</M_Name>
 <Voice>Alto</Voice>
-<Plays ref_ins = "i030">
+<Plays ref_ins = "i030"/>
 <Collections>It is greater than 120</Collections>
 </Musician>
