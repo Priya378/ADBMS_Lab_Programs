@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!ELEMENT student_event (title, description, participants, duration)>
+<!ELEMENT student_event (title, description, participants, duration, rating)>
 <!ATTLIST student_event event_no CDATA #REQUIRED>
 <!ATTLIST student_event type CDATA #REQUIRED>
 
@@ -11,8 +11,12 @@
 <!ELEMENT  summary (#PCDATA)>
 
 <!ELEMENT  participants (participant+)>
-<!ELEMENT  participant (#PCDATA)>
+<!ELEMENT  participant (name, gender, branch, semester)>
 <!ATTLIST participant reg_no CDATA #REQUIRED>
+<!ELEMENT  name (#PCDATA)>
+<!ELEMENT  gender (#PCDATA)>
+<!ELEMENT  branch (#PCDATA)>
+<!ELEMENT  semester (#PCDATA)>
 
 <!ELEMENT  duration (#PCDATA)>
 <!ELEMENT  rating (#PCDATA)>

@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<! -- 
-XML documents are needed to be generated for storing Student Event details. A Student Event should contain the following information. Event Number and Type should be included as attributes. Title, Description, participants, duration, and Rating are child elements of Student Event. Description can contain Summary, Date, Slot, etc. participants in turn contain participant which should have name, gender, branch and semester as child elements and reg_no as attribute.
--- >
-
 <!DOCTYPE student_event SYSTEM "student.dtd">
 <student_event event_no = "3578" type = "Discussion">
     <title>"Reading increases thinking abilities"</title>
