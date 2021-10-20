@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT student_event (title, description, participants, duration)>
+<!ATTLIST student_event event_no CDATA #REQUIRED>
+<!ATTLIST student_event type CDATA #REQUIRED>
+
+<!ELEMENT  title (#PCDATA)>
+
+<!ELEMENT  description (summary)>
+<!ATTLIST description date CDATA #REQUIRED>
+<!ATTLIST description slot CDATA #IMPLIED>
+<!ELEMENT  summary (#PCDATA)>
+
+<!ELEMENT  participants (participant+)>
+<!ELEMENT  participant (#PCDATA)>
+<!ATTLIST participant reg_no CDATA #REQUIRED>
+
+<!ELEMENT  duration (#PCDATA)>
+<!ELEMENT  rating (#PCDATA)>
