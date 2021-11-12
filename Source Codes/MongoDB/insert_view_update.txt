@@ -1,0 +1,123 @@
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use exp
+switched to db exp
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> show collections
+> exp.people.insert({Name: Priya})
+uncaught exception: ReferenceError: exp is not defined :
+@(shell):1:1
+> db.people.insert({Name: Priya})
+uncaught exception: ReferenceError: Priya is not defined :
+@(shell):1:19
+> db.people.insert({Name: "Priya"})
+WriteResult({ "nInserted" : 1 })
+> show dbs
+admin   0.000GB
+config  0.000GB
+exp     0.000GB
+local   0.000GB
+> show collections
+people
+> db.people.insert({Name: "Vamsi"})
+WriteResult({ "nInserted" : 1 })
+> db.people.find()
+{ "_id" : ObjectId("618dc5ea85e331cb994a4424"), "Name" : "Priya" }
+{ "_id" : ObjectId("618dc66885e331cb994a4425"), "Name" : "Vamsi" }
+> db.people.find({Name: "Priya"})
+{ "_id" : ObjectId("618dc5ea85e331cb994a4424"), "Name" : "Priya" }
+> db.people.find(Name: {$in ["Vamsi","Priya"]})
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:19
+> db.people.find({Name: {$in ["Vamsi","Priya"]}})
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:27
+> db.people.find({"Name": {$in ["Vamsi","Priya"]}})
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:29
+> db.people.find({"Name": {$"in" ["Vamsi","Priya"]}})
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:26
+> db.people.find({"Name": {$in: ["Vamsi","Priya"]}})
+{ "_id" : ObjectId("618dc5ea85e331cb994a4424"), "Name" : "Priya" }
+{ "_id" : ObjectId("618dc66885e331cb994a4425"), "Name" : "Vamsi" }
+> db.people.find({Name: {$in: ["Vamsi","Priya"]}})
+{ "_id" : ObjectId("618dc5ea85e331cb994a4424"), "Name" : "Priya" }
+{ "_id" : ObjectId("618dc66885e331cb994a4425"), "Name" : "Vamsi" }
+> db.people.distinct(Name)
+uncaught exception: ReferenceError: Name is not defined :
+@(shell):1:1
+> db.people.distinct("Name")
+[ "Priya", "Vamsi" ]
+> db.people.find({Name: {$in: ["Vamsi","Priya", "Krishna"]}})
+{ "_id" : ObjectId("618dc5ea85e331cb994a4424"), "Name" : "Priya" }
+{ "_id" : ObjectId("618dc66885e331cb994a4425"), "Name" : "Vamsi" }
+> db.people.insert({Mood:["happy,"excited"]})
+uncaught exception: SyntaxError: missing ] after element list :
+@(shell):1:32
+> db.people.insertMany([\
+... {Name: "Krishna", Type: "Eternal"},\
+... {Name: "Pri", Type: "Mortal"}\
+... ])
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shellhelp1):1:51
+error2:SyntaxError: "" literal not terminated before end of script :
+@(shellhelp1):1:51
+
+> db.people.insertMany([\ {Name: "Krishna", Type: "Eternal"},\ {Name: "Pri", Type: "Mortal"}\ ]);
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shellhelp1):1:51
+error2:SyntaxError: "" literal not terminated before end of script :
+@(shellhelp1):1:51
+
+> db.people.insertMany([\ {"Name": "Krishna", "Type": "Eternal"},\ {"Name": "Pri", "Type": "Mortal"}\ ]);
+uncaught exception: SyntaxError: "" literal not terminated before end of script :
+@(shellhelp1):1:51
+error2:SyntaxError: "" literal not terminated before end of script :
+@(shellhelp1):1:51
+
+> db.people.insertMany([{Name: "Krishna", Type: "Eternal"}, {Name: "Pri", Type: "Mortal"} ]);
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("618dd04285e331cb994a4426"),
+                ObjectId("618dd04285e331cb994a4427")
+        ]
+}
+> db.people.find()
+{ "_id" : ObjectId("618dc5ea85e331cb994a4424"), "Name" : "Priya" }
+{ "_id" : ObjectId("618dc66885e331cb994a4425"), "Name" : "Vamsi" }
+{ "_id" : ObjectId("618dd04285e331cb994a4426"), "Name" : "Krishna", "Type" : "Eternal" }
+{ "_id" : ObjectId("618dd04285e331cb994a4427"), "Name" : "Pri", "Type" : "Mortal" }
+> db.people.findOne()
+{ "_id" : ObjectId("618dc5ea85e331cb994a4424"), "Name" : "Priya" }
+> db.people.findLast()
+uncaught exception: TypeError: db.people.findLast is not a function :
+@(shell):1:1
+> db.people.update({"_id": ObjectId("618dc5ea85e331cb994a4424")}, {$set : {Mood: "Happy"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.people.find()
+{ "_id" : ObjectId("618dc5ea85e331cb994a4424"), "Name" : "Priya", "Mood" : "Happy" }
+{ "_id" : ObjectId("618dc66885e331cb994a4425"), "Name" : "Vamsi" }
+{ "_id" : ObjectId("618dd04285e331cb994a4426"), "Name" : "Krishna", "Type" : "Eternal" }
+{ "_id" : ObjectId("618dd04285e331cb994a4427"), "Name" : "Pri", "Type" : "Mortal" }
+> db.people.find().sort({$natural: 2})
+{ "_id" : ObjectId("618dc5ea85e331cb994a4424"), "Name" : "Priya", "Mood" : "Happy" }
+{ "_id" : ObjectId("618dc66885e331cb994a4425"), "Name" : "Vamsi" }
+{ "_id" : ObjectId("618dd04285e331cb994a4426"), "Name" : "Krishna", "Type" : "Eternal" }
+{ "_id" : ObjectId("618dd04285e331cb994a4427"), "Name" : "Pri", "Type" : "Mortal" }
+> db.people.find().sort({$natural: -1})
+{ "_id" : ObjectId("618dd04285e331cb994a4427"), "Name" : "Pri", "Type" : "Mortal" }
+{ "_id" : ObjectId("618dd04285e331cb994a4426"), "Name" : "Krishna", "Type" : "Eternal" }
+{ "_id" : ObjectId("618dc66885e331cb994a4425"), "Name" : "Vamsi" }
+{ "_id" : ObjectId("618dc5ea85e331cb994a4424"), "Name" : "Priya", "Mood" : "Happy" }
+> db.people.find().sort({$natural: 1})
+{ "_id" : ObjectId("618dc5ea85e331cb994a4424"), "Name" : "Priya", "Mood" : "Happy" }
+{ "_id" : ObjectId("618dc66885e331cb994a4425"), "Name" : "Vamsi" }
+{ "_id" : ObjectId("618dd04285e331cb994a4426"), "Name" : "Krishna", "Type" : "Eternal" }
+{ "_id" : ObjectId("618dd04285e331cb994a4427"), "Name" : "Pri", "Type" : "Mortal" }
